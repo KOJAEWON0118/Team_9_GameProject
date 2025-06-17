@@ -10,26 +10,27 @@ using System.Windows.Forms;
 
 namespace Game
 {
-    public partial class Select : Form
+    public partial class Main : Form
     {
-        public Select()
+        public Main()
         {
             InitializeComponent();
         }
 
-        private void Open_Lan_Click(object sender, EventArgs e)
+        private void btnMulti_Click(object sender, EventArgs e)
         {
-            Set_Room SR = new Set_Room();
+            Select_multi Mt = new Select_multi();
             this.Hide();
-            SR.ShowDialog();
+            Mt.ShowDialog();
             this.Show();
+
         }
 
-        private void Join_Client_Click(object sender, EventArgs e)
+        private void btnSingle_Click(object sender, EventArgs e)
         {
-            Enter_Room ER = new Enter_Room();
+            Select_Single Sm = new Select_Single();
             this.Hide();
-            ER.ShowDialog();
+            Sm.ShowDialog();
             this.Show();
         }
     }

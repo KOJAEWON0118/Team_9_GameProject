@@ -31,12 +31,42 @@ namespace Game
             public NetworkStream Stream;
         }
         private RoleType role;
+        private bool isBroadcasting = true;
 
         /*client 전용 변수*/
         TcpClient client_client; //클라이언트용
         NetworkStream client_stream; // 클라이언트용
         bool client_Connected = false;
         private CreateRoomData roomData;
+
+        //서버 IP 자동 탐색 함수(UDP 수신
+        private string FindServerIpViaUdp(out int serverPort)
+        {
+            UdpClient udp = new UdpClient(50000); // 서버가 브로드캐스트하는 포트
+            IPEndPoint remote = new IPEndPoint(IPAddress.Any, 0);
+            string serverIp = null;
+            serverPort = 7777; // 기본값
+
+            while (true)
+            {
+                byte[] data = udp.Receive(ref remote); // UDP 패킷 수신 대기
+                string msg = Encoding.UTF8.GetString(data);
+                if (msg.StartsWith("SERVER_IP:"))
+                {
+                    string[] parts = msg.Split(';');
+                    foreach (string part in parts)
+                    {
+                        if (part.StartsWith("SERVER_IP:"))
+                            serverIp = part.Substring("SERVER_IP:".Length);
+                        else if (part.StartsWith("PORT:"))
+                            serverPort = int.Parse(part.Substring("PORT:".Length));
+                    }
+                    break;
+                }
+            }
+            udp.Close();
+            return serverIp;
+        }
         private void ConnectClient()
         {
             try
@@ -44,7 +74,12 @@ namespace Game
                 byte[] sendBuffer = new byte[1024 * 4];
                 byte[] readBuffer = new byte[1024 * 4];
                 client_client = new TcpClient();
-                client_client.Connect("127.0.0.1", 7777); //나중에 lan으로 바꿀거
+
+
+                int serverPort;
+                string serverIp = FindServerIpViaUdp(out serverPort);
+                client_client.Connect(serverIp, serverPort); // 자동으로 찾은 IP/PORT 사용
+
                 client_stream = client_client.GetStream(); //stream생성
                 client_Connected = true;
 
@@ -52,7 +87,7 @@ namespace Game
                 ChatMessage msg_enter = new ChatMessage
                 {
                     Nickname = "시스템",
-                    Message = roomData.Nickname+"이 입장했습니다"
+                    Message = roomData.Nickname + "이 입장했습니다"
                 };
                 Packet enter = new Packet
                 {
@@ -69,7 +104,7 @@ namespace Game
                         while (client_Connected)
                         {
                             //서버가 보낸 데이터를 읽기. Read(읽을 데이터를 저장할 배열, 저장을 시작할 위치, 저장을 최대 몇 바이트)
-                            int bytesRead = client_stream.Read(readBuffer, 0, readBuffer.Length); 
+                            int bytesRead = client_stream.Read(readBuffer, 0, readBuffer.Length);
                             if (bytesRead == 0)
                                 break;
 
@@ -83,14 +118,8 @@ namespace Game
                     {
                         AppendLog($"클라이언트 수신 오류: {ex.Message}");
                     }
-                    finally
-                    {
-                        client_stream?.Close();
-                        client_client?.Close();
-                        
-                        client_Connected = false;
-                        AppendLog("서버 연결이 종료되었습니다.");
-                    }
+  
+
                 });
 
                 m_thread.IsBackground = true;
@@ -99,7 +128,7 @@ namespace Game
             catch (Exception ex)
             {
                 AppendLog($"서버 접속 실패: {ex.Message}");
-            }                  
+            }
         }
         private void StartServer()
         {
@@ -107,13 +136,16 @@ namespace Game
             {
                 m_listener = new TcpListener(IPAddress.Any, 7777); // 서버 접속 권한 설정하기
                 m_listener.Start(); // 서버열기
+
+                StartBroadcastingServerIp();
+
                 AppendLog("서버가 시작되었습니다. 클라이언트 접속을 기다립니다...");
 
                 Thread m_thread = new Thread(() =>
                 {
                     while (true)
                     {
-                        //clientCounter<roomData.MaxPlayers
+                       
                         try
                         {
                             TcpClient client = m_listener.AcceptTcpClient();
@@ -127,7 +159,7 @@ namespace Game
                             };
                             // 클라이언트 처리 스레드 생성
                             Thread clientThread = new Thread(() => HandleClient(info));
-                            info.Thread = clientThread; 
+                            info.Thread = clientThread;
 
                             lock (clients)
                             {
@@ -184,7 +216,7 @@ namespace Game
             }
         }
 
-   
+
 
         //서버가 client들한테 broadcast할때 사용
         private void HandlePacket(Packet packet)
@@ -193,7 +225,7 @@ namespace Game
             {
                 case PacketType.Chat:
                     ChatMessage msg = (ChatMessage)packet.Data;
-                    
+
 
                     Broadcast(packet);
                     break;
@@ -221,6 +253,32 @@ namespace Game
             }
         }
 
+        private void StartBroadcastingServerIp()
+        {
+            new Thread(() =>
+            {
+                UdpClient udp = new UdpClient(); // UdpClient (UDP 소켓) — 서버 찾기/브로드캐스트용
+                udp.EnableBroadcast = true;
+                //데이터를 보낼 “대상 주소”와 “포트”를 지정, IPAddress.Broadcast = 255.255.255.255.255 lan 전체를 의미
+                IPEndPoint ep = new IPEndPoint(IPAddress.Broadcast, 50000);
+
+                while (isBroadcasting)
+                {
+                    string msg = $"SERVER_IP:{GetLocalIPAddress()};PORT:7777;NAME:{roomData.Nickname};PWD:{roomData.Password};MAX:{roomData.MaxPlayers};Count:{clientCounter}";
+                    byte[] data = Encoding.UTF8.GetBytes(msg);
+                    udp.Send(data, data.Length, ep);
+                    Thread.Sleep(1000); // 1초에 한 번 브로드캐스트
+                }
+                udp.Close();
+            })
+            { IsBackground = true }.Start();
+        }
+
+        private void StopBroadcasting()
+        {
+            isBroadcasting = false;
+        }
+
         //현재 local ip얻기(UDP braodcast 때 사용)
         string GetLocalIPAddress()
         {
@@ -246,19 +304,15 @@ namespace Game
 
 
 
-        public ChatRoom(RoleType role, CreateRoomData roomData)
+        public ChatRoom(RoleType role, CreateRoomData roomData) //매개변수전달
         {
             InitializeComponent();
-             this.role = role;
+            this.role = role;
             this.roomData = roomData;  // ← 필드에 저장
         }
 
         private void ChatRoom_Load(object sender, EventArgs e)
         {
-            name.Text = roomData.Nickname;
-            password.Text = roomData.Password;
-            people.Text = roomData.MaxPlayers.ToString();
-
             // 서버생성과 client 생성
             if (roomData.MaxPlayers == 1)
             {
@@ -308,8 +362,25 @@ namespace Game
         {
             if (roomData.MaxPlayers == 1)
             {
-                // 참가 요청 처리
-                
+
+                ChatMessage msg = new ChatMessage
+                {
+                    Nickname = "시스템",
+                    Message = roomData.Nickname + "나갔습니다."
+                };
+
+                Packet packet = new Packet
+                {
+                    Type = (int)PacketType.Chat,
+                    Data = msg
+                };
+
+                byte[] bytes = PacketUtil.Serialize(packet); // 직렬화(object를 매개변수로)
+                client_stream.Write(bytes, 0, bytes.Length);      // 실제 전송
+                client_stream?.Close();
+                client_client?.Close();
+                client_Connected = false;
+
             }
             else if (roomData.MaxPlayers >= 2)
             {

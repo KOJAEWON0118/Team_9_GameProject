@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    partial class Select
+    partial class Select_multi
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.
@@ -78,7 +78,7 @@
             this.Join_Client.Text = "Client 참여";
             this.Join_Client.Click += new System.EventHandler(this.Join_Client_Click);
             // 
-            // Select
+            // Select_multi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -86,7 +86,7 @@
             this.Controls.Add(this.Join_Client);
             this.Controls.Add(this.Open_Wan);
             this.Controls.Add(this.Open_Lan);
-            this.Name = "Select";
+            this.Name = "Select_multi";
             this.Text = "Select";
             this.ResumeLayout(false);
 

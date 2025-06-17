@@ -52,37 +52,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatRoom.cs">
+    <Compile Include="1_Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChatRoom.Designer.cs">
-      <DependentUpon>ChatRoom.cs</DependentUpon>
+    <Compile Include="1_Main.Designer.cs">
+      <DependentUpon>1_Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Enter_Room.cs">
+    <Compile Include="2.1_Select%28single%29.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Enter_Room.Designer.cs">
-      <DependentUpon>Enter_Room.cs</DependentUpon>
+    <Compile Include="2.1_Select%28single%29.Designer.cs">
+      <DependentUpon>2.1_Select%28single%29.cs</DependentUpon>
     </Compile>
-    <Compile Include="Select.cs">
+    <Compile Include="4_ChatRoom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Select.Designer.cs">
-      <DependentUpon>Select.cs</DependentUpon>
+    <Compile Include="4_ChatRoom.Designer.cs">
+      <DependentUpon>4_ChatRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="3.3_Enter_Room.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="3.3_Enter_Room.Designer.cs">
+      <DependentUpon>3.3_Enter_Room.cs</DependentUpon>
+    </Compile>
+    <Compile Include="2.2_Select%28multi%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="2.2_Select%28multi%29.Designer.cs">
+      <DependentUpon>2.2_Select%28multi%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Game_Memory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Game_Memory.Designer.cs">
+      <DependentUpon>Game_Memory.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Set_Room.cs">
+    <Compile Include="3.1_Set_Room.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Set_Room.Designer.cs">
-      <DependentUpon>Set_Room.cs</DependentUpon>
+    <Compile Include="3.1_Set_Room.Designer.cs">
+      <DependentUpon>3.1_Set_Room.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ChatRoom.resx">
-      <DependentUpon>ChatRoom.cs</DependentUpon>
+    <EmbeddedResource Include="1_Main.resx">
+      <DependentUpon>1_Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Enter_Room.resx">
-      <DependentUpon>Enter_Room.cs</DependentUpon>
+    <EmbeddedResource Include="2.1_Select%28single%29.resx">
+      <DependentUpon>2.1_Select%28single%29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="4_ChatRoom.resx">
+      <DependentUpon>4_ChatRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="3.3_Enter_Room.resx">
+      <DependentUpon>3.3_Enter_Room.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,12 +116,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Select.resx">
-      <DependentUpon>Select.cs</DependentUpon>
+    <EmbeddedResource Include="2.2_Select%28multi%29.resx">
+      <DependentUpon>2.2_Select%28multi%29.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Set_Room.resx">
-      <DependentUpon>Set_Room.cs</DependentUpon>
+    <EmbeddedResource Include="3.1_Set_Room.resx">
+      <DependentUpon>3.1_Set_Room.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -118,6 +143,15 @@
       <Project>{af83d429-5961-4aa8-8245-653cd1b02589}</Project>
       <Name>Packet_Chat</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Break_Block.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Land_Battle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Race_image.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
