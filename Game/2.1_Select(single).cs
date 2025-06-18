@@ -22,5 +22,11 @@ namespace Game
             Game_Memory GM = new Game_Memory();
 
         }
+
+        private void btnBlock_Click(object sender, EventArgs e)
+        {
+            BrickBreaker.BrickBreaker bb = new BrickBreaker.BrickBreaker();
+            bb.Show();
+        }
     }
 }

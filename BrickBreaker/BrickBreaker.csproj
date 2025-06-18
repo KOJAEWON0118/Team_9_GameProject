@@ -1,13 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2C519F16-E62E-486B-952A-889B760E93F2}</ProjectGuid>
+    <ProjectGuid>{E8BF4700-AB57-43AE-8B2C-0D08F20353B1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Game</RootNamespace>
-    <AssemblyName>Game</AssemblyName>
+    <RootNamespace>BrickBreaker</RootNamespace>
+    <AssemblyName>BrickBreaker</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -52,83 +52,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="1_Main.cs">
+    <Compile Include="BBForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="1_Main.Designer.cs">
-      <DependentUpon>1_Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="2.1_Select%28single%29.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="2.1_Select%28single%29.Designer.cs">
-      <DependentUpon>2.1_Select%28single%29.cs</DependentUpon>
-    </Compile>
-    <Compile Include="4_ChatRoom.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="4_ChatRoom.Designer.cs">
-      <DependentUpon>4_ChatRoom.cs</DependentUpon>
-    </Compile>
-    <Compile Include="3.3_Enter_Room.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="3.3_Enter_Room.Designer.cs">
-      <DependentUpon>3.3_Enter_Room.cs</DependentUpon>
-    </Compile>
-    <Compile Include="2.2_Select%28multi%29.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="2.2_Select%28multi%29.Designer.cs">
-      <DependentUpon>2.2_Select%28multi%29.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Game_Memory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Game_Memory.Designer.cs">
-      <DependentUpon>Game_Memory.cs</DependentUpon>
+    <Compile Include="BBForm.Designer.cs">
+      <DependentUpon>BBForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="3.1_Set_Room.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="3.1_Set_Room.Designer.cs">
-      <DependentUpon>3.1_Set_Room.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="1_Main.resx">
-      <DependentUpon>1_Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="2.1_Select%28single%29.resx">
-      <DependentUpon>2.1_Select%28single%29.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="4_ChatRoom.resx">
-      <DependentUpon>4_ChatRoom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="3.3_Enter_Room.resx">
-      <DependentUpon>3.3_Enter_Room.cs</DependentUpon>
+    <EmbeddedResource Include="BBForm.resx">
+      <DependentUpon>BBForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="2.2_Select%28multi%29.resx">
-      <DependentUpon>2.2_Select%28multi%29.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="3.1_Set_Room.resx">
-      <DependentUpon>3.1_Set_Room.cs</DependentUpon>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -139,23 +88,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BrickBreaker\BrickBreaker.csproj">
-      <Project>{e8bf4700-ab57-43ae-8b2c-0d08f20353b1}</Project>
-      <Name>BrickBreaker</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Packet_Chat\Packet_Chat.csproj">
-      <Project>{af83d429-5961-4aa8-8245-653cd1b02589}</Project>
-      <Name>Packet_Chat</Name>
-    </ProjectReference>
+    <None Include="Resources\brick-breaker-logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Break_Block.jpg" />
+    <None Include="Resources\brick-icon-basic.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Land_Battle.jpg" />
+    <None Include="Resources\brick-icon-blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Race_image.jpg" />
+    <None Include="Resources\paddle_up_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\speed_down_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player1-wins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player2-wins.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
