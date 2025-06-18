@@ -1,0 +1,12 @@
+C:\Users\최태겸\source\repos\Bula\Bula\bin\Debug\Bula.exe.config
+C:\Users\최태겸\source\repos\Bula\Bula\bin\Debug\Bula.exe
+C:\Users\최태겸\source\repos\Bula\Bula\bin\Debug\Bula.pdb
+C:\Users\최태겸\source\repos\Bula\Bula\obj\Debug\Bula.csproj.AssemblyReference.cache
+C:\Users\최태겸\source\repos\Bula\Bula\obj\Debug\Bula.Bula_Game.resources
+C:\Users\최태겸\source\repos\Bula\Bula\obj\Debug\Bula.Bula_Main.resources
+C:\Users\최태겸\source\repos\Bula\Bula\obj\Debug\Bula.Properties.Resources.resources
+C:\Users\최태겸\source\repos\Bula\Bula\obj\Debug\Bula.csproj.GenerateResource.cache
+C:\Users\최태겸\source\repos\Bula\Bula\obj\Debug\Bula.csproj.CoreCompileInputs.cache
+C:\Users\최태겸\source\repos\Bula\Bula\obj\Debug\Bula.exe
+C:\Users\최태겸\source\repos\Bula\Bula\obj\Debug\Bula.pdb
+C:\Users\최태겸\source\repos\Bula\Bula\obj\Debug\Bula.exe.config

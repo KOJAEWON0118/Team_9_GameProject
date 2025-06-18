@@ -1,0 +1,5 @@
+C:\Users\최태겸\source\repos\Bula\Bula_Game\obj\Debug\Bula_Game.csproj.AssemblyReference.cache
+C:\Users\최태겸\source\repos\Bula\Bula_Game\obj\Debug\Bula_Game.Bula_Game.resources
+C:\Users\최태겸\source\repos\Bula\Bula_Game\obj\Debug\Bula_Game.Properties.Resources.resources
+C:\Users\최태겸\source\repos\Bula\Bula_Game\obj\Debug\Bula_Game.csproj.GenerateResource.cache
+C:\Users\최태겸\source\repos\Bula\Bula_Game\obj\Debug\Bula_Game.csproj.CoreCompileInputs.cache
