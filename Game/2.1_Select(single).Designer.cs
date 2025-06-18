@@ -137,6 +137,7 @@
             this.btnRace.Size = new System.Drawing.Size(202, 36);
             this.btnRace.TabIndex = 20;
             this.btnRace.Text = "시작";
+            this.btnRace.Click += new System.EventHandler(this.btnRace_Click);
             // 
             // btnCard
             // 

@@ -143,6 +143,10 @@
       <Project>{e8bf4700-ab57-43ae-8b2c-0d08f20353b1}</Project>
       <Name>BrickBreaker</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Car_Racing\Car_Racing.csproj">
+      <Project>{c779b98f-7705-47c1-81a5-4acac68451d6}</Project>
+      <Name>Car_Racing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Packet_Chat\Packet_Chat.csproj">
       <Project>{af83d429-5961-4aa8-8245-653cd1b02589}</Project>
       <Name>Packet_Chat</Name>
